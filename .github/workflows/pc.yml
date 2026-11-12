@@ -27,8 +27,7 @@ jobs:
 
       - name: Installer et connecter Tailscale
         run: |
-          Invoke-WebRequest -Uri "https://tailscale.com" -OutFile "$env:TEMP\tailscale.msi"
-          Start-Process msiexec.exe -ArgumentList "/i", "`"$env:TEMP\tailscale.msi`"", "/quiet", "/norestart" -Wait
+          winget install --id Tailscale.Tailscale --silent --accept-package-agreements --accept-source-agreements
           & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=${{ secrets.TAILSCALE_AUTHKEY }} --hostname=mon-pc-windows
 
       - name: Afficher l'adresse IP et garder le PC allume
